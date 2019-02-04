@@ -1,0 +1,26 @@
+# Codeception Test Suite Configuration
+
+# suite for functional (integration) tests.
+# emulate web requests and make application process them.
+# (tip: better to use with frameworks).
+
+# RUN `build` COMMAND AFTER ADDING/REMOVING MODULES.
+#basic/web/index.php
+class_name: FunctionalTester
+modules:
+    enabled:
+      - Asserts
+      - Yii2
+#      - AMQP:
+#          host: 'rabbitmq'
+#          port: '5672'
+#          username: 'user'
+#          password: 'pass'
+#          vhost: '/'
+      - REST:
+          depends: Yii2
+          url:
+    config:
+        Yii2:
+            configFile: 'config/tests/functional.php'
+            cleanup: true # don't wrap test in transaction

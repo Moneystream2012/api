@@ -1,0 +1,7 @@
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Jobs:
+# m h  dom mon dow   command
+  1 *  *   *   *     php /var/www/html/bin/yii cron/payouts
+
+# should have new line

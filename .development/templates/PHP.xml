@@ -1,0 +1,87 @@
+<templateSet group="PHP">
+  <template name="api" value="@api {method} /url_rule/ Short action description" description="Add @api tag to apidoc comments." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apiv" value="@apiVersion 1.0.0" description="Insert api version tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apin" value="@apiName SomeName" description="Add api name tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apig" value="@apiGroup GroupName" description="Add api group tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apid" value="@apiDescription Description of api." description="Add api description for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apih" value="@apiHeader (Object) {String} Header-Name Header description" description="Add api header for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apihe" value="@apiHeaderExample {json} Header-Example:&#10;*    {&#10;*        &quot;HeaderName&quot;: &quot;Header-Name: values&quot;&#10;*    }" description="Add api header example for api doc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apie" value="@apiExample Example usage:&#10;* curl http://example.com/api" description="Add api exmple tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apis" value="@apiSuccess {Type} paramName Param description." description="Add api success tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apise" value="@apiSuccessExample Success-Response:&#10;*     HTTP/1.1 200 OK&#10;*     {&#10;*       &quot;param1&quot;: &quot;Param1 value&quot;,&#10;*       &quot;param2&quot;: &quot;Param2 value&quot;&#10;*     }" description="Add api success example tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apiu" value="@apiUse Name" description="Add api use tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apip" value="@apiPermission Name" description="Add api permission tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apidef" value="@apiDefine Name" description="Add api define tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apierr" value="@apiError ErrorName Error description." description="Add api error tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apierre" value="@apiErrorExample Error-Response:&#10;*     HTTP/1.1 404 Not Found&#10;*     {&#10;*       &quot;error&quot;: &quot;Error description&quot;&#10;*     }" description="Add api error description tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apib" value="@api {method} /url_rule/ Short Name&#10;* @apiVersion 1.0.0&#10;* @apiName SomeName&#10;* @apiGroup Name&#10;*&#10;* @apiDescription Api description.&#10;*&#10;* @apiHeader (Object) {String} Accept-Encoding Accepting formats.&#10;* @apiHeaderExample {json} Header-Example:&#10;*     {&#10;*       &quot;Accept-Encoding&quot;: &quot;Accept-Encoding: gzip, deflate&quot;&#10;*     }&#10;*&#10;* @apiParam {Number} param1 Description of param1.&#10;* @apiParam {String} param2 Description of param2.&#10;* @apiParam {String} param3=1 Description of param3 with default value.&#10;* @apiParam {Object} [param4=null] Description of optional param4 with default value.&#10;*&#10;* @apiSuccess {String} param1 Param1 description.&#10;* @apiSuccess {String} param2 Param2 description.&#10;*&#10;* @apiSuccessExample Success-Response:&#10;*     HTTP/1.1 200 OK&#10;*     {&#10;*       &quot;param1&quot;: &quot;Param1 value&quot;,&#10;*       &quot;param2&quot;: &quot;Param2 value&quot;&#10;*     }&#10;*&#10;* @apiError ObjectNotFound The id of the Object was not found.&#10;*&#10;* @apiErrorExample Error-Response:&#10;*     HTTP/1.1 404 Not Found&#10;*     {&#10;*       &quot;error&quot;: &quot;ObjectNotFound&quot;&#10;*     }&#10;*&#10;* @apiPermission name" description="Add api block for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+  <template name="apipar" value="@apiParam {type} Name Description." description="Add api param tag for apidoc." toReformat="false" toShortenFQNames="true">
+    <context>
+      <option name="PHP" value="true" />
+    </context>
+  </template>
+</templateSet>

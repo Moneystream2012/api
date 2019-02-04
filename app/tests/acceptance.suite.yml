@@ -1,0 +1,8 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - Cli
+#        - Yii2:
+#            part: [orm, Db, fixtures]
+#            configFile: 'config/tests/acceptance.php'
+#            cleanup: false

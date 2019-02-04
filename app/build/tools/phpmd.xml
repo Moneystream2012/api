@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpmd" basedir=".">
+    <target name="run"
+            description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsDir}phpmd" failonerror="true">
+            <arg path="${srcDir}" />
+            <arg value="text" />
+            <arg path="${buildDir}phpmd/ruleset.xml" />
+
+
+            <arg value="--exclude=${srcDir}/Migrations" />
+
+
+        </exec>
+    </target>
+
+    <target name="run-ci"
+            description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsDir}phpmd"
+              output="/dev/null"
+              resultproperty="phpmd.result"
+              failonerror="false">
+
+            <arg path="${srcDir}/Modules/Game,${srcDir}/Modules/CDN" />
+
+            <arg value="html" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/phpmd/report.html" />
+            <arg path="${basedir}/build/phpmd/ruleset.xml" />
+        </exec>
+        <fail message="ERROR: PHP Mess Detector. See /build/phpmd/report.xml">
+            <condition>
+                <not>
+                    <equals arg1="${phpmd.result}" arg2="0"/>
+                </not>
+            </condition>
+        </fail>
+    </target>
+</project>

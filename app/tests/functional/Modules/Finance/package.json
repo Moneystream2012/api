@@ -1,0 +1,32 @@
+[
+	{
+		"id": 3,
+		"userId": 2,
+		"typeId": 1,
+		"amount": "77.17584222",
+		"rate": 0.07,
+		"status": "active",
+		"createdAt": "2017-08-24 11:37:15",
+		"type": {
+			"id": 1,
+			"name": "TestParkingType",
+			"rate": 0.1,
+			"period": 50000
+		}
+	},
+	{
+		"id": 4,
+		"userId": 2,
+		"typeId": 1,
+		"amount": "10.00000111",
+		"rate": 0.08,
+		"status": "active",
+		"createdAt": "2017-08-24 11:37:15",
+		"type": {
+			"id": 1,
+			"name": "TestParkingType",
+			"rate": 0.1,
+			"period": 50000
+		}
+	}
+]

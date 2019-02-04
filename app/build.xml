@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant-build-script" basedir=".">
+
+    <property name="buildDir"  value="${basedir}/build/"/>
+    <property name="toolsDir"  value="${basedir}/vendor/bin/"/>
+    <property name="srcDir"  value="${basedir}/src/"/>
+    <property name="testsDir"  value="${basedir}/tests/"/>
+
+    <import>
+        <fileset dir="${buildDir}/tools" includes="*.xml" />
+    </import>
+
+
+
+    <target name="tests" depends="prepare,
+    phplint.parallel,
+    phpcs.run,
+    phpcs.run,
+    phpdepend.run,
+    phpcpd.run,
+    yii.migrate,
+    yii.generate-models,
+    codeception.run
+"/>
+
+    <!--  phpmd phpmd-ci -->
+    <target name="codecept" description="">
+        <antcall target="yii.migrate"/>
+        <antcall target="yii.generate-models"/>
+        <antcall target="codeception.run"/>
+    </target>
+
+    <target name="codecept-coverage" description="" depends="prepare,phplint.parallel">
+        <antcall target="yii.migrate"/>
+        <antcall target="yii.generate-models"/>
+        <antcall target="codeception.run-coverage"/>
+    </target>
+
+
+    <target name="tools-ci" description="Run tools in parallel">
+        <antcall target="phplint.parallel"/>
+        <parallel threadCount="8">
+            <antcall target="phploc.run-ci"/>
+            <antcall target="phpcs.run-ci"/>
+            <!--antcall target="phpmd.run-ci"/-->
+            <antcall target="phpdepend.run-ci"/>
+            <antcall target="phpcpd.run-ci"/>
+        </parallel>
+    </target>
+
+
+    <target name="build-ci" depends="
+    prepare,
+    tools-ci,
+    yii.migrate,
+    yii.generate-models,
+    codeception.run
+" description=""/>
+
+
+
+
+    <target name="prepare" unless="prepare.done" description="Prepare for build">
+        <delete dir="${basedir}/storage/runtime/cache" />
+        <mkdir dir="${basedir}/storage/runtime/cache"/>
+
+        <delete dir="${basedir}/storage/runtime/debug"/>
+        <mkdir dir="${basedir}/storage/runtime/debug"/>
+
+        <delete dir="${basedir}/web/assets"/>
+        <mkdir dir="${basedir}/web/assets"/>
+
+        <delete dir="${srcDir}/Modules/Database"/>
+        <mkdir dir="${srcDir}/Modules/Database"/>
+
+        <delete dir="${testsDir}_output"/>
+        <mkdir dir="${testsDir}_output"/>
+
+
+        <delete dir="${testsDir}_output"/>
+    </target>
+
+
+</project>

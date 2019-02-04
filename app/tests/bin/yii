@@ -1,0 +1,29 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Yii console bootstrap file.
+ *
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
+
+defined('YII_APP_BASE_PATH') or define('APP_ROOT', dirname(dirname(__DIR__)).'/');
+
+require APP_ROOT . 'vendor/autoload.php';
+require APP_ROOT . 'vendor/yiisoft/yii2/Yii.php';
+
+Yii::setAlias('@tests', APP_ROOT.'tests');
+Yii::setAlias('@App', APP_ROOT . 'src');
+
+$config = yii\helpers\ArrayHelper::merge(
+    require APP_ROOT . 'config/cli/cli.php',
+    require APP_ROOT . 'config/tests/config.php'
+);
+
+$application = new yii\console\Application($config);
+$exitCode = $application->run();
+exit($exitCode);

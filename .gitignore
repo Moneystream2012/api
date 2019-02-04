@@ -1,0 +1,25 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+/.env
+/.idea/
+.docker/data/*
+.docker/php/logs/*
+.docker/mariadb/logs/*
+.docker/mariadb/data/*
+.docker/minexcoin/data/*
+.docker/apiDoc/data/*
+.docker/nginx/logs/*
+
+.docker/mongodb/logs/*
+.docker/mongodb/data/*
+
+.docker/redis/data/*
+
+.docker/php/data/*
+app/storage/*
+app/src/Modules/Database/*
+app/web/assets/*
+
+.development/Xcoin-doc.php
+.docker/php/MinexCoin/*
+!.docker/php/MinexCoin/.gitkeep

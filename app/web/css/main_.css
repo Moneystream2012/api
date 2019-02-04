@@ -1,0 +1,35 @@
+body {
+	padding-top:60px;
+	padding-bottom:40px;
+}
+
+.sidebar-nav{
+	padding:9px 0;
+}
+
+#modal-window {
+	height: 500px;
+}
+
+#button-for-cancel{
+	float: left;
+	margin-left: 16px;
+}
+
+.park_rate {
+	width:140px;
+	margin: 0 auto;
+}
+.park_rate_info {
+	width:140px;
+	border:1px solid #ababab;
+	padding-bottom:10px;
+}
+.park_rate_percent {
+	font-size:32px;
+	margin-top:10px;
+	margin-bottom:6px;
+}
+.park_button {
+	background: #ababab !important; border-radius: 0 !important;
+}

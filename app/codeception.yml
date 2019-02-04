@@ -1,0 +1,31 @@
+actor: Tester
+coverage:
+  enabled: true
+  remote: false
+  include:
+          - src/*
+  exclude:
+          - src/*Test.php
+          - src/*Cest.php
+          - src/*pem
+          - src/Modules/Database/*
+paths:
+    tests: tests
+    log: tests/_output
+    data: tests/_data
+    helpers: tests/_support
+settings:
+    bootstrap: _bootstrap.php
+    memory_limit: 1024M
+    log: true
+    colors: true
+modules:
+    config:
+        Yii2:
+            configFile: 'config/tests/config.php'
+groups:
+  finance: [tests/unit/Modules/Finance, tests/functional/Modules/Finance, tests/access/Finance]
+  notification: [tests/unit/Modules/Notification, tests/functional/Modules/Notification, tests/access/Notification]
+  subscribe: [tests/unit/Modules/Subscribe, tests/functional/Modules/Subscribe, tests/access/Subscribe]
+  support: [tests/unit/Modules/Support, tests/functional/Modules/Support, tests/access/Support]
+  user: [tests/unit/Modules/User, tests/functional/Modules/User, tests/access/User]

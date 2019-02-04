@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpdepend" basedir=".">
+    <target name="run"
+            description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsDir}pdepend">
+            <arg value="--jdepend-xml=${buildDir}/phpdepend/jdepend.xml" />
+            <arg value="--jdepend-chart=${buildDir}/phpdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${buildDir}/phpdepend/overview-pyramid.svg" />
+            <arg path="${srcDir},${basedir}/tests" />
+        </exec>
+    </target>
+
+    <target name="run-ci"
+            description="Calculate software metrics using PHP_Depend and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsDir}pdepend" output="/dev/null">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg path="${srcDir},${basedir}/tests" />
+        </exec>
+    </target>
+</project>

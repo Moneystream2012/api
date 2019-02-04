@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yii" basedir=".">
+
+    <property name="yii.tests.script" value="${basedir}/tests/bin/yii"/>
+    <property name="yii.script" value="${basedir}/bin/yiiq"/>
+
+    <target name="migrate"
+            unless="${yii.script.ok},${yii.tests.script.ok}"
+            depends="script-exists"
+            description="Run all migrations"
+    >
+        <echo message="Run migrations"/>
+        <exec executable="php" dir="${basedir}" failonerror="true">
+            <arg value="${yii.tests.script}"/>
+            <arg value="migrate/up"/>
+            <arg value="--interactive=0"/>
+            <arg value="--color=0"/>
+        </exec>
+    </target>
+
+    <target name="script-exists">
+        <available property="yii.tests.script.ok" file="${yii.tests.script}" />
+        <available property="yii.script.ok" file="${yii.script}" />
+    </target>
+
+    <target name="generate-models">
+        <exec executable="php">
+            <arg value="${yii.tests.script}" />
+            <arg value="gii/model" />
+            <arg value="--tableName=*" />
+            <arg value="--interactive=0"/>
+            <arg value="--overwrite=1"/>
+            <arg value="--color=0"/>
+        </exec>
+    </target>
+
+</project>

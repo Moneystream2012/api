@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpcpd" basedir=".">
+    <target name="run"
+            description="Find duplicate code using PHPCPD and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="php" failonerror="${phpcpd.fail.on.violation}">
+            <arg value="-d" />
+            <arg value="memory_limit=1024M" />
+            <arg value="${toolsDir}phpcpd" />
+            <arg value="-vvv" />
+            <arg value="--exclude"/>
+            <arg value="Database"/>
+            <arg value="${srcDir}" />
+        </exec>
+
+        <!--exec executable="">
+            <arg value="exclude=${srcDir}/Modules/Database/*"/>
+            <arg path="${srcDir}" />
+        </exec-->
+    </target>
+
+    <target name="run-ci"
+            description="Find duplicate code using PHPCPD and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsDir}phpcpd" failonerror="true">
+            <arg value="--log-pmd"/>
+            <arg value="${buildDir}phpcpd/pmd-cpd.xml"/>
+            <arg value="--exclude"/>
+            <arg value="Database"/>
+            <arg path="${srcDir}"/>
+        </exec>
+    </target>
+</project>

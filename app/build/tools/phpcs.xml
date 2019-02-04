@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phpcs" basedir=".">
+    <target name="run"
+            description="Find coding standard violations using PHP_CodeSniffer and print human readable output. Intended for usage on the command line before committing.">
+        <exec executable="${toolsDir}phpcs" failonerror="true">
+            <arg value="--standard=${buildDir}/phpcs/ruleset.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${srcDir}Migrations/" />
+            <arg value="--ignore=${srcDir}Modules/Database" />
+            <arg path="${srcDir}" />
+        </exec>
+    </target>
+
+    <target name="fix" description="">
+        <exec executable="${toolsDir}phpcbf">
+            <arg value="--report=checkstyle" />
+            <arg value="--report-file=${buildDir}/phpcs/report.xml" />
+            <arg value="--standard=${buildDir}/phpcs/ruleset.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${srcDir}/Migrations/" />
+            <arg value="--ignore=${srcDir}/Modules/Database" />
+            <arg path="${srcDir}" />
+        </exec>
+    </target>
+
+    <target name="run-ci"
+            description="Find coding standard violations using PHP_CodeSniffer and log result in XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsDir}phpcs"
+              output="/dev/null"
+              resultproperty="phpcs.result"
+              failonerror="false">
+            <arg value="--report=checkstyle" />
+            <arg value="--standard=${buildDir}/phpcs/ruleset.xml" />
+            <arg value="--extensions=php" />
+            <arg value="--ignore=${srcDir}/Migrations/" />
+            <arg value="--ignore=${srcDir}/Modules/Database" />
+            <arg path="${srcDir}" />
+        </exec>
+        <!--fail message="ERROR: PHP CodeStyle. See /build/phpcs/report.xml">
+            <condition>
+                <not>
+                    <equals arg1="${phpcs.result}" arg2="0"/>
+                </not>
+            </condition>
+        </fail-->
+
+    </target>
+
+
+
+</project>

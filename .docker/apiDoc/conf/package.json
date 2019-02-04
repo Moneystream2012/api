@@ -1,0 +1,19 @@
+{
+  "name": "minex-bank-apidoc",
+  "version": "1.0.0",
+  "scripts": {
+	  "apidoc": "apidoc -i /source -o /usr/src/static"
+  },
+  "dependencies": {
+    "apidoc": "^0.17.5",
+    "koa": "^2.2.0",
+    "koa-static": "^3.0.0"
+  },
+  "devDependencies": {
+
+  },
+  "apidoc": {
+    "title": "Minex Bank API documentation",
+    "url" : "http://fake-server/"
+  }
+}

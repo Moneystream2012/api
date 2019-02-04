@@ -1,0 +1,17 @@
+# Created by .ignore support plugin (hsz.mobi)
+phpcpd/*
+!phpcpd/.gitkeep
+
+
+phpcs/*
+!phpcs/ruleset.xml
+
+phpdepend/*
+!phpdepend/.gitkeep
+
+
+phploc/*
+!phploc/.gitkeep
+
+phpmd/*
+!phpmd/ruleset.xml

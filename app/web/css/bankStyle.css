@@ -1,0 +1,62 @@
+ .paginationAll {
+    text-align: center;
+  }
+  .pagination >li>a{
+    color: #9ce5d6;
+  /*  cursor: default;*/
+    /*background-color: #24e1ba;*/
+    background-color: #3b3e42;
+    /*border-color: #3b3e42;*/
+    border-color: #25282c;
+  }
+  .pagination >.active>a{
+    color: #3b3e42;
+  /*  cursor: default;*/
+    background-color: #24e1ba;
+    /*background-color: #3b3e42;*/
+    /*border-color: #3b3e42;*/
+    border-color: #25282c;
+  }
+  .pagination>.disabled>span{
+    color: #9ce5d6;
+  /*  cursor: default;*/
+    /*background-color: #24e1ba;*/
+    background-color: #3b3e42;
+    /*border-color: #3b3e42;*/
+    border-color: #25282c;
+  }
+  .pagination>.active>a:hover {
+    color: #25282c;
+    background-color: #24e1ba;
+    border-color: #3b3e42;
+  }
+
+  .pagination>li>a:hover{
+    color: #3b3e42;
+    background-color: #9ce5d6;
+    border-color: #3b3e42;
+  }
+.pagination>.disabled>span:hover {
+  color: #3b3e42;
+    background-color: #9ce5d6;
+    border-color: #3b3e42;
+  }
+    #refreshBalance {
+    color: #26C8A9;
+    opacity: 0.5; 
+  }
+  #refreshBalance:hover {
+    color: #26C8A9;
+    opacity:1; 
+    cursor: pointer;
+  }
+  #refreshBalance{
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+    transition-duration: 0.5s;
+    -webkit-transition-property: -webkit-transform;
+    -moz-transition-property: -moz-transform;
+    -o-transition-property: -o-transform;
+    transition-property: transform;
+  }

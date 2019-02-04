@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="phploc" basedir=".">
+    <target name="run"
+            description="Measure project size using PHPLOC and print human readable output. Intended for usage on the command line.">
+        <exec executable="${toolsDir}phploc" failonerror="true">
+            <arg value="--count-tests" />
+            <arg path="${srcDir}" />
+            <arg path="${basedir}/tests" />
+        </exec>
+    </target>
+
+    <target name="run-ci"
+            description="Measure project size using PHPLOC and log result in CSV and XML format. Intended for usage within a continuous integration environment.">
+        <exec executable="${toolsDir}phploc" resultproperty="phploc.output" output="/dev/null">
+            <arg value="--count-tests" />
+            <arg value="--log-csv" />
+            <arg path="${buildDir}/phploc/phploc.csv" />
+            <arg value="--log-xml" />
+            <arg path="${buildDir}/phploc/phploc.xml" />
+            <arg path="${srcDir}" />
+            <arg path="${basedir}/tests" />
+        </exec>
+        <fail message="ERROR: phploc. See: build/logs/phploc.xml">
+            <condition>
+                <not>
+                    <equals arg1="${phploc.output}" arg2="0"/>
+                </not>
+            </condition>
+        </fail>
+
+    </target>
+</project>

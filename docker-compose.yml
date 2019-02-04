@@ -1,0 +1,163 @@
+version: "3.3"
+services:
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}_nginx
+    build:
+      context: .
+      dockerfile: .docker/nginx/Dockerfile
+    volumes:
+     - ./.docker/nginx/config/nginx.conf:/etc/nginx/conf.d/default.conf
+     - ./.docker/nginx/config/cert:/etc/default/cert/nginx
+
+     - ./.docker/nginx/logs/:/var/log/nginx
+     #apidock
+     - ./.docker/apiDoc/data:/var/www/apidoc
+     #project
+     - ./app:/var/www/html
+    depends_on:
+     - php
+    ports:
+     - "${NGINX_SSL_PORT}:443"
+     - "${NGINX_PORT}:80"
+
+  php:
+    container_name: ${COMPOSE_PROJECT_NAME}_php
+    image: php:fpm
+    build:
+      context: .
+      dockerfile: .docker/php/Dockerfile
+    depends_on:
+      - redis
+      - rabbitmq
+      - mariadb
+      - mongodb
+#      - minexnode
+    volumes:
+    #config
+      #fpm
+      - ./.docker/php/conf/fpm/php-fpm.conf:/etc/php/7.1/fpm/php-fpm.conf
+      - ./.docker/php/conf/fpm/pool.d:/etc/php/7.1/fpm/pool.d
+      - ./.docker/php/conf/fpm/php.ini:/etc/php/7.1/fpm/php.ini
+
+      #modules
+      - ./.docker/php/conf/mods-available/xdebug.ini:/etc/php/mods-available/xdebug.ini
+
+      #logs
+      - ./.docker/php/logs/runtime:/var/www/html/runtime
+      - ./.docker/php/logs/php:/var/log/php
+      #debug TODO!
+      #- ./.docker/php/debug:/var/log/php-debug
+
+      - ~/.composer:/root/.composer
+      - ./app:/var/www/html
+
+      #config
+      - ./.docker/php/conf/Minexcoin.conf:/root/Minexcoin.conf
+      #data
+      - ./.docker/php/data/:/root/.Minexcoin/
+      #bin
+      - ./.docker/php/MinexCoin:/root/MinexCoin
+    ports:
+      - 17786:17786
+
+
+    environment:
+      DB_DRIVER: ${DB_DRIVER}
+      MYSQL_HOST: ${MYSQL_HOST}
+      DB_USER_NAME: ${MYSQL_USER}
+      DB_USER_PASSWORD: ${MYSQL_PASSWORD}
+      DB_NAME: ${MYSQL_DATABASE}
+      DB_PREFIX: ${MYSQL_DB_PREFIX}
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      BROCKER_PORT: ${RABBITMQ_CONNECTION_PORT}
+      BROCKER_USER_NAME: ${RABBITMQ_DEFAULT_USER}
+      BROCKER_USER_PASS: ${RABBITMQ_DEFAULT_PASS}
+      REDIS_HOST: "redis"
+      REDIS_PORT: ${REDIS_PORT}
+      REDIS_DB: 2
+
+  rabbitmq:
+    container_name: ${COMPOSE_PROJECT_NAME}_rabbitmq
+    image: rabbitmq:management
+    hostname: ${RABBITMQ_HOST}
+    volumes:
+      - "./.docker/data/db/rabbitmq:/var/lib/rabbitmq"
+    ports:
+      - "${RABBITMQ_MANAGEMENT_PORT}:8080"
+      - "${RABBITMQ_CONNECTION_PORT}:5672"
+      - "${RABBITMQ_GUI}:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+  mariadb:
+    container_name: ${COMPOSE_PROJECT_NAME}_mariadb
+    image: mariadb
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci --init-connect='SET NAMES UTF8MB4;' --innodb-flush-log-at-trx-commit=0
+    volumes:
+     - ./.docker/mariadb/config/my.cfg:/etc/mysql/my.cfg
+     - ./.docker/mariadb/data:/var/lib/mysql
+     - ./.docker/mariadb/logs:/var/log/mysql
+     - ./.docker/mariadb/initdb:/docker-entrypoint-initdb.d/
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "${MYSQL_PORT}:3306"
+
+  mongodb:
+    container_name: ${COMPOSE_PROJECT_NAME}_mongodb
+    image: mongo:3.4.6
+    command: mongod --config /etc/mongod.conf
+    volumes:
+      - ./.docker/mongodb/config/mongod.conf:/etc/mongod.conf
+      - ./.docker/mongodb/initdb:/docker-entrypoint-initdb.d/
+      - ./.docker/mongodb/data:/data/db
+      - ./.docker/mongodb/logs:/var/log/mongodb
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME}
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+    ports:
+      - "${MONGO_PORT}:27017"
+
+  redis:
+    container_name: ${COMPOSE_PROJECT_NAME}_redis
+    image: redis
+    build:
+        context: .
+        dockerfile: .docker/redis/Dockerfile
+    volumes:
+      - ./.docker/redis/data:/data
+    ports:
+      - "${REDIS_PORT}:6379"
+
+  apidoc:
+    container_name: ${COMPOSE_PROJECT_NAME}_apidoc
+    image: node:6-alpine
+    build:
+      context: .
+      dockerfile: .docker/apiDoc/Dockerfile
+    volumes:
+      - ./.docker/apiDoc/data:/usr/src/static
+      - ./app/src:/source
+    environment:
+      APP_PORT: ${APIDOC_PORT}
+
+#  minexnode:
+#      container_name: ${COMPOSE_PROJECT_NAME}_minex_node
+#      image: ubuntu:16.04
+#      build:
+#        context: .
+#        dockerfile: .docker/minexcoin/Dockerfile
+#      volumes:
+#      #config
+#        - ./.docker/minexcoin/conf/minexcoin.conf:/root/.Minexcoin/Minexcoin.conf
+#      #data
+#        - ./.docker/minexcoin/data/:/root/.Minexcoin/
+#      ports:
+#       - "${MINEXNODE_PORT}:17785"
+#      environment:
+#         MINEXNODE_RPCTHREADS: ${MINEXNODE_RPCTHREADS}

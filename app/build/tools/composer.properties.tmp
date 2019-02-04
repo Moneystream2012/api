@@ -1,0 +1,15 @@
+#Ant properties
+#Fri Sep 08 07:48:09 UTC 2017
+composer.basedir=/var/www/html/build/tools
+composer.file=composer.properties
+composer.file.tmp=composer.properties.tmp
+composer.lock=${composer.lock.path}/composer.lock
+composer.lock.file=composer.lock
+composer.phar=/var/www/html/composer.phar
+composer.phar.file=composer.phar
+composer.phar.path=/var/www/html
+composer.project.dir=/var/www/html
+composer.properties=/var/www/html/build/tools/composer.properties
+composer.properties.filter=/var/www/html/build/tools/composer.properties.tmp
+composer.properties.tmp=/var/www/html/build/tools/composer.properties.tmp
+composer.vendordir=/var/www/html/vendor
