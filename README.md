@@ -1,5 +1,3 @@
-#MINEX BANK API APP
-
 ##Build project with Docker
 
 ```
